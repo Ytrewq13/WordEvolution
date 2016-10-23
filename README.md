@@ -1,6 +1,7 @@
 # WordEvolution
 A python project to evolve random strings towards a target word/phrase.
 When run it will request a string to use as the target.
+Theoretically the target string could be the source code for the program.
 
 It will then generate a population of random strings of equal length to the target.
 Based on their similarity to the target the strings 'reproduce', after the worst half are removed, to refill the population.
