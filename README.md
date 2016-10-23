@@ -6,7 +6,7 @@ It will then generate a population of random strings of equal length to the targ
 Based on their similarity to the target the strings 'reproduce', after the worst half are removed, to refill the population.
 This will happen repeatedly until the target phrase is achieved.
 
-Supported characters are all lowercase letters, uppercase letters, digits, punctuation, and the space character.
+Supported characters are: all lowercase letters, uppercase letters, digits, punctuation, and the space character.
 
 This project doesn't require any additional libraries for python to be installed.
 
