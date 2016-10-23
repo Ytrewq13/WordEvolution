@@ -50,14 +50,16 @@ def evaluate(phrase, goal):
 # Uses simple crossover of first half of first creature and second half of second creature.
 def reproduce(phrase1, phrase2):
     wordLen = len(phrase1)
-    if wordLen != len(phrase2):
+    if wordLen > len(phrase2):
         return phrase1
+    elif wordLen < len(phrase2):
+        return phrase2
     offspring = str()
     for i in range(wordLen):
         if i < math.ceil(wordLen/2):
-            offspring += phrase1[i]
+            offspring += str(phrase1[i])
         else:
-            offspring += phrase2[i]
+            offspring += str(phrase2[i])
     offspring = mutate(offspring, mutability)
     return offspring
 
@@ -89,6 +91,11 @@ def getPair(valpop):
     for i in valpop:
         for chance in range(i[0]):
             matingPool.append(i[1])
+    # This was causing the error where there was nothing in the mating pool.
+    if len(matingPool) < 2:
+        # Add a new random creature to the mating pool.
+        matingPool.append(''.join(random.sample(chooseFrom, phraseLen)))
+        matingPool.append(''.join(random.sample(chooseFrom, phraseLen)))
     pair = random.sample(matingPool, 2)
     return pair
 
@@ -131,10 +138,12 @@ def nextGen(pop):
 
 
 # Do stuff here.
-try:
-    finalPhrase = str(raw_input("Phrase to search for: ")) # Target phrase from user input.
-except:
-    finalPhrase = str(input("Phrase to search for: ")) # Needed for Python 3 compatibility.
+finalPhrase = ""
+while len(finalPhrase) <= 1:
+    try:
+        finalPhrase = str(raw_input("Phrase to search for: ")) # Target phrase from user input.
+    except:
+        finalPhrase = str(input("Phrase to search for: ")) # Needed for Python 3 compatibility.
 phraseLen = len(finalPhrase) # Set the length of the target.
 population = populate(popSize) # Make the first generation.
 fin = False
