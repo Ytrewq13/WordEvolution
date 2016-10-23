@@ -1,4 +1,5 @@
-import random, math, string
+import random, math, string, os, sys
+from sys import platform
 from operator import itemgetter
 
 # Size of the population.
@@ -107,6 +108,12 @@ def nextGen(pop):
         fitness = evaluate(word, finalPhrase) # Evaluate the fitness of the word.
         valuedPop.append((fitness, word)) # Add the fitness and word to the list.
     valuedPop.sort(key=itemgetter(0), reverse=True) # Sort best to worst.
+    if genNum != 0:
+        for i in range(4):
+            sys.stdout.write("\033[F")
+            sys.stdout.write("\033[K")
+        if platform == "win32":
+            os.system("cls")
     print("Best: " + str(valuedPop[0][1]))
     print("Best fitness: " + str(valuedPop[0][0]))
     print("Generation: " + str(genNum + 1))
