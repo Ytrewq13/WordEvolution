@@ -131,7 +131,10 @@ def nextGen(pop):
 
 
 # Do stuff here.
-finalPhrase = str(raw_input("Phrase to search for: ")) # Target phrase from user input.
+try:
+    finalPhrase = str(raw_input("Phrase to search for: ")) # Target phrase from user input.
+except:
+    finalPhrase = str(input("Phrase to search for: ")) # Needed for Python 3 compatibility.
 phraseLen = len(finalPhrase) # Set the length of the target.
 population = populate(popSize) # Make the first generation.
 fin = False
