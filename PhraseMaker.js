@@ -1,5 +1,5 @@
-var popSize = 512; // How many creatures in the population.
-var mutability = 0.02; // Probability that any letter of 'DNA' will mutate at a time.
+var popSize = 1024; // How many creatures in the population.
+var mutability = 0.01; // Probability that any letter of 'DNA' will mutate at a time.
 var genNum = 0; // Used to keep track of the generation number.
 var finalPhrase = "To be or not to be, that is the question."; // Shouldn't be used at all.
 
@@ -116,9 +116,9 @@ function getPair(pool) {
 
 // Function to update the elements on the page.
 function draw(pop, vals) {
-  document.getElementById("outputarea1").innerHTML = "Best: " + pop[0];
-  document.getElementById("outputarea2").innerHTML = "Best fitness: " + vals[0];
-  document.getElementById("outputarea3").innerHTML = "Generation: " + (genNum + 1);
+  document.getElementById("outputarea1").innerHTML = "<h1>Best: " + pop[0] + "</h1>";
+  document.getElementById("outputarea2").innerHTML = "<b>Best fitness: " + vals[0] + "</b>";
+  document.getElementById("outputarea3").innerHTML = "<i>Generation: " + (genNum + 1) + "</i>";
 }
 
 // Function to iterate to the next generation given the current generation.
@@ -139,11 +139,7 @@ function nextGen(pop) {
   }
   delete i;
   delete valuedPop;
-  setTimeout(draw(pop, vals), 100);
-  //draw(pop, vals);
-  console.log("Best: " + pop[0]);
-  console.log("Best fitness: " + vals[0]);
-  console.log("Generation: " + (genNum + 1));
+  draw(pop, vals);
   // If we are done.
   if (pop[0] == finalPhrase) {
     return [pop, false];
@@ -164,6 +160,7 @@ function nextGen(pop) {
   return [pop, true];
 }
 
+// Function to iterate to the target phrase.
 function nextIteration() {
   returned = nextGen(population);
   delete population;
@@ -174,7 +171,7 @@ function nextIteration() {
   if (cont) {
     setTimeout(nextIteration, 10);
   } else {
-    alert("Completed!");
+    setTimeout(function() {alert("Completed!");}, 100);
   }
 }
 
@@ -182,10 +179,9 @@ function nextIteration() {
 // Do stuff here.
 
 // Get the final phrase from the user.
-var finalPhrase = prompt("Please enter a phrase\nto evolve towards.", "To be or not to be.");
+var finalPhrase = prompt("Please enter a phrase\nto evolve towards.", "Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
 var phraseLen = finalPhrase.length;
 population = populate(popSize); // Make the first generation.
 var cont = true;
 
 setTimeout(nextIteration, 10);
-//alert("Completed!");
