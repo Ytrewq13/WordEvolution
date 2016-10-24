@@ -1,5 +1,5 @@
 # WordEvolution
-A python project to evolve random strings towards a target word/phrase.
+A Python (and now JS) project to evolve random strings towards a target word/phrase.
 When run it will request a string to use as the target.
 Theoretically the target string could be the source code for the program.
 
